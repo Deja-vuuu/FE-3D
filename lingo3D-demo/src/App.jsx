@@ -1,27 +1,55 @@
-import { World, Cube, useAnimation, Model, ThirdPersonCamera, Skybox, useKeyboard, useLoop, usePreload } from "lingo3d-react"
+import { World, Cube, useAnimation, Model,SkyLight, ThirdPersonCamera,OrbitCamera, Skybox, useKeyboard, useLoop, usePreload } from "lingo3d-react"
 import { useRef } from 'react'
 
 const Game = () => {
   const key = useKeyboard()
   const characterRef = useRef()
   useLoop(() => {
-    // characterRef.current.moveForward(-10)
-  }, key === 'w')
-  const movtion = key === 'w' ? "walking" : "idle"
+    characterRef.current.moveForward(-3)
+  }, key.includes('w'))
+  // useLoop(() => {
+  //   characterRef.current.moveForward(-3)
+  // }, key === 'alt')
+  const movtion = key.includes('w') ? "walking" : "idle"
+  const lockTargetRotation = key === 'Alt' ? false : true
+
+  console.log(
+    'key',key,
+    'lockTargetRotation',lockTargetRotation
+  );
   return (
     <World>
       <Model src="Grassland.glb" scale={270} physics="map" />
-      <ThirdPersonCamera active mouseControl>
+      <ThirdPersonCamera 
+      active
+      mouseControl
+      lockTargetRotation={false} 
+      >
         <Model
           ref={characterRef}
-          src="a.fbx"
+          src="Idle.fbx"
+          // src="Walking.fbx
           physics="character"
-          animations={{ idle: "a.fbx", walking: "c.fbx" }}
+          animations={{ 
+            idle: "Idle.fbx", 
+            walking: "Walking.fbx",
+            run: 'Flair.fbx'
+          }}
           animation={movtion}
         // visible={false}
         />
       </ThirdPersonCamera>
+      {/* <Model
+          ref={characterRef}
+          src="Idle.fbx"
+          physics="character"
+          animations={{ idle: "Idle.fbx", walking: "Idle.fbx" }}
+          animation='walking'
+        // visible={false}
+        /> */}
+            {/* <OrbitCamera active autoRotate z={200} /> */}
       <Skybox texture='skybox.jpg' />
+      <SkyLight color="yellow"  intensity={0.5}/>
     </World>
   )
 }
