@@ -18,7 +18,7 @@ const Game = () => {
           physics="character"
           animations={{ idle: "Rifle Idle.fbx", walking: "Rifle Run.fbx" }}
           animation={movtion}
-          visible={false}
+        // visible={false}
         />
       </ThirdPersonCamera>
       <Skybox texture='skybox.jpg' />
