@@ -5,18 +5,18 @@ const Game = () => {
   const key = useKeyboard()
   const characterRef = useRef()
   useLoop(() => {
-    characterRef.current.moveForward(-10)
+    // characterRef.current.moveForward(-10)
   }, key === 'w')
   const movtion = key === 'w' ? "walking" : "idle"
   return (
     <World>
-      <Model src="Grassland.glb" scale={270} physics="map-debug" />
+      <Model src="Grassland.glb" scale={270} physics="map" />
       <ThirdPersonCamera active mouseControl>
         <Model
           ref={characterRef}
-          src="Fox.fbx"
+          src="a.fbx"
           physics="character"
-          animations={{ idle: "Rifle Idle.fbx", walking: "Rifle Run.fbx" }}
+          animations={{ idle: "a.fbx", walking: "c.fbx" }}
           animation={movtion}
         // visible={false}
         />
