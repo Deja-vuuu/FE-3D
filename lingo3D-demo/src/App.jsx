@@ -2,7 +2,9 @@ import { World, Cube, useAnimation, Model, SkyLight, ThirdPersonCamera, OrbitCam
 import { useEffect, useRef, useState } from 'react'
 
 const Game = () => {
-  let movtion = 'idle'
+  const [movtion, setMovtion] = useState('idle')
+  const [testMovtion, setTestMovtion] = useState('idle')
+  const [a,setA]= useState(false)
   const characterRef = useRef()
   const key = useKeyboard()
   // useLoop(() => {
@@ -16,33 +18,38 @@ const Game = () => {
   const playerController = () => {
     const ArrowUpKeyMap = ['w', 'W', 'ArrowUp']
     const ArrowDownMap = ['s', 'S', 'ArrowDown']
+    const isArrowUp = ArrowUpKeyMap.includes(key)
+    const isArrowDown = ArrowDownMap.includes(key) 
+    console.log(isArrowUp,isArrowDown)
     useLoop(() => {
       characterRef.current.moveForward(-3)
-    }, ArrowUpKeyMap.includes(key))
+    }, isArrowUp)
 
     useLoop(() => {
       characterRef.current.moveForward(3)
-    }, ArrowDownMap.includes(key))
-    // useLoop(() => {
-    //   characterRef.current.moveForward(-3)
-    // }, key === 'alt')
-    console.log(characterRef.current)
-    movtion = key.includes('w') ? 'walking' : 'idle'
-  }
-  if (key === '`') {
-    console.log(12312)
-  }
+    }, isArrowDown)
 
-  console.log('key', key, 'lockTargetRotation', lockTargetRotation)
-
+    let cmovtion =  movtion === 'hiPhop'?movtion: 'idle'
+    if(isArrowUp){
+      cmovtion ='walking'
+    }
+    if(isArrowDown){
+      cmovtion ='walkingBack'
+    }
+    if(key=== 'q'){
+      cmovtion ='hiPhop'
+    }
+    if(cmovtion !== movtion){
+      setMovtion(cmovtion)
+    }
+   
+  }
   const guaGame = () => {
-    console.log('guaGame')
+
     playerController()
   }
   guaGame()
-  useEffect(() => {
-    console.log('useEffect')
-  }, [])
+  console.log(movtion)
   return (
     <World>
       <Model src="Grassland.glb" scale={270} physics="map" />
@@ -50,21 +57,22 @@ const Game = () => {
         <Model
           ref={characterRef}
           src="Idle.fbx"
-          // src="Walking.fbx
           physics="character"
           animations={{
             idle: 'Idle.fbx',
             walking: 'Walking.fbx',
-            walkingBack: 'Walking Backwards.fbx',
-            run: 'Flair.fbx',
+            walkingBack: 'Walking Backward.fbx',
+            hiPhop: 'Hip Hop Dancing.fbx'
           }}
           animation={movtion}
           intersectIDs={['test']}
           onIntersect={(e) => {
-            console.log('onIntersect', e)
+            setMovtion('hiPhop')
+            setTestMovtion('twerk')
           }}
           onIntersectOut={(e) => {
-           console.log('onIntersectOut', e)
+            // setMovtion('hiPhop')
+            setTestMovtion('twerk')
           }}
         // visible={false}
         />
@@ -73,9 +81,14 @@ const Game = () => {
         // ref={characterRef}
         src="Idle.fbx"
         physics="character"
-        animations={{ idle: 'Idle.fbx', walking: 'Idle.fbx' }}
-        animation="walking"
-
+        animations={{ 
+          idle: 'Idle.fbx',
+          twerk: 'Dancing Twerk.fbx'
+        }}
+        animation={testMovtion}
+        bloom={true}
+        x={400}
+        z={-100}
         id="test"
       // visible={false}
       />
@@ -89,7 +102,7 @@ const Game = () => {
 }
 const App = () => {
   const progress = usePreload(
-    ['Grassland.glb', 'ground.jpeg', 'Idle.fbx', 'Rifle Idle.fbx', 'Rifle Run.fbx', 'skybox.jpg', 'Walking.fbx'],
+    ['Idle.fbx','Grassland.glb', 'Walking Backward.fbx', 'Dancing Twerk','skybox.jpg', 'Walking.fbx','Hip Hop Dancing.fbx'],
     '6.6mb',
   )
 
