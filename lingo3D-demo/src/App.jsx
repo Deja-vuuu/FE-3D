@@ -4,13 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 const Game = () => {
   const [movtion, setMovtion] = useState('idle')
   const [testMovtion, setTestMovtion] = useState('idle')
-  const [a,setA]= useState(false)
   const characterRef = useRef()
   const key = useKeyboard()
-  // useLoop(() => {
-  //   characterRef.current.moveForward(-3)
-  // }, key === 'alt')
-  // const movtion = key.includes('w') ? 'walking' : 'idle';
   const lockTargetRotation = key === '`' ? false : true
   /**
    * 人物控制
@@ -19,8 +14,8 @@ const Game = () => {
     const ArrowUpKeyMap = ['w', 'W', 'ArrowUp']
     const ArrowDownMap = ['s', 'S', 'ArrowDown']
     const isArrowUp = ArrowUpKeyMap.includes(key)
-    const isArrowDown = ArrowDownMap.includes(key) 
-    console.log(isArrowUp,isArrowDown)
+    const isArrowDown = ArrowDownMap.includes(key)
+    console.log(isArrowUp, isArrowDown)
     useLoop(() => {
       characterRef.current.moveForward(-3)
     }, isArrowUp)
@@ -29,20 +24,20 @@ const Game = () => {
       characterRef.current.moveForward(3)
     }, isArrowDown)
 
-    let cmovtion =  movtion === 'hiPhop'?movtion: 'idle'
-    if(isArrowUp){
-      cmovtion ='walking'
+    let cmovtion = movtion === 'hiPhop' ? movtion : 'idle'
+    if (isArrowUp) {
+      cmovtion = 'walking'
     }
-    if(isArrowDown){
-      cmovtion ='walkingBack'
+    if (isArrowDown) {
+      cmovtion = 'walkingBack'
     }
-    if(key=== 'q'){
-      cmovtion ='hiPhop'
+    if (key === 'q') {
+      cmovtion = 'hiPhop'
     }
-    if(cmovtion !== movtion){
+    if (cmovtion !== movtion) {
       setMovtion(cmovtion)
     }
-   
+
   }
   const guaGame = () => {
 
@@ -71,7 +66,6 @@ const Game = () => {
             setTestMovtion('twerk')
           }}
           onIntersectOut={(e) => {
-            // setMovtion('hiPhop')
             setTestMovtion('twerk')
           }}
         // visible={false}
@@ -81,7 +75,7 @@ const Game = () => {
         // ref={characterRef}
         src="Idle.fbx"
         physics="character"
-        animations={{ 
+        animations={{
           idle: 'Idle.fbx',
           twerk: 'Dancing Twerk.fbx'
         }}
@@ -102,7 +96,7 @@ const Game = () => {
 }
 const App = () => {
   const progress = usePreload(
-    ['Idle.fbx','Grassland.glb', 'Walking Backward.fbx', 'Dancing Twerk','skybox.jpg', 'Walking.fbx','Hip Hop Dancing.fbx'],
+    ['Idle.fbx', 'Grassland.glb', 'Walking Backward.fbx', 'Dancing Twerk', 'skybox.jpg', 'Walking.fbx', 'Hip Hop Dancing.fbx'],
     '6.6mb',
   )
 
