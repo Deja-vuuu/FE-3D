@@ -17,11 +17,11 @@ const Game = () => {
     const isArrowDown = ArrowDownMap.includes(key)
     console.log(isArrowUp, isArrowDown)
     useLoop(() => {
-      characterRef.current.moveForward(-3)
+      characterRef.current.moveForward(-5)
     }, isArrowUp)
 
     useLoop(() => {
-      characterRef.current.moveForward(3)
+      characterRef.current.moveForward(5)
     }, isArrowDown)
 
     let cmovtion = movtion === 'hiPhop' ? movtion : 'idle'
