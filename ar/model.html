@@ -31,19 +31,11 @@
 </style>
 
 <body style='margin : 0px; overflow: hidden;'>
-    <div class="arjs-loader">
-        <div>Loading, please wait...</div>
-    </div>
-    <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
-        arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
-        <a-nft type='nft' url='./nft/iset/join_popup' smooth='true' smoothCount='10' smoothTolerance='0.01'
-            smoothThreshold='5'>
-            <a-entity gltf-model='./nft/trex/scene.gltf' scale="5 5 5" position="100 100 0">
-            </a-entity>
-        </a-nft>
+    <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded <a-entity
+        gltf-model='./nft/trex/scene.gltf' scale="5 5 5" position="100 100 0">
+        </a-entity>
         <a-entity camera></a-entity>
     </a-scene>
-
 </body>
 <script>
     window.addEventListener("arjs-nft-loaded", (event) => {
