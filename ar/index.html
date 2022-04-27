@@ -36,8 +36,10 @@
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
         <a-nft type="nft" url="https://deja-vuuu.github.io/FE-3D/ar/nft/iset/join_popup" smooth="true" smoothCount="10"
-            smoothTolerance="0.01" smoothThreshold="5">
-            <a-entity gltf-model="./nft/test.gltf" scale="50 50 50" position="100 100 100">
+            raycaster="objects: .clickable" smoothTolerance="0.01" smoothThreshold="5" emitevents="true"
+            cursor="fuse: false; rayOrigin: mouse;">
+            <a-entity gltf-model="./nft/test.gltf" scale="150 150 150" position="100 300 100" class="clickable"
+                gesture-handler>
             </a-entity>
         </a-nft>
         <a-entity camera></a-entity>
