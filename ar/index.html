@@ -4,11 +4,11 @@
 <script>
     var vConsole = new window.VConsole();
 </script>
-<script
-    src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<script src="./build/aframe-ar.js"></script>
 <script src="./build/aframe-ar-nft.js"></script>
 
-
+<script src="./build/gesture-detector.js"></script>
+<script src="./build/gesture-handler.js"></script>
 <style>
     .arjs-loader {
         height: 100%;
@@ -38,7 +38,7 @@
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
         <a-nft type="nft" url="https://deja-vuuu.github.io/FE-3D/ar/nft/iset/join_popup" smooth="true" smoothCount="10"
             smoothTolerance="0.01" smoothThreshold="5">
-            <a-entity gltf-model="./nft/test.gltf" scale="5 5 5" position="100 100 0">
+            <a-entity gltf-model="./nft/test.gltf" scale="50 50 50" position="100 100 100">
             </a-entity>
         </a-nft>
         <a-entity camera></a-entity>
